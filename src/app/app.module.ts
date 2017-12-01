@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
     HeaderComponent,
     HomeComponent,
     AboutComponent,
-    RestaurantsComponent
+    RestaurantsComponent,
+    RestaurantComponent
   ],
   imports: [BrowserModule, RouterModule, AppRoutingModule],
   providers: [],
