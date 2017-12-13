@@ -1,5 +1,7 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -19,6 +21,10 @@ import { RestaurantService } from './restaurants/restaurant.service';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 
+registerLocaleData(localePt);
+
+const localeService = { provide: LOCALE_ID, useValue: 'pt-br' };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +40,12 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
     ReviewsComponent
   ],
   imports: [BrowserModule, RouterModule, AppRoutingModule, HttpClientModule],
-  providers: [ErrorService, RestaurantService, ShoppingCartService],
+  providers: [
+    ErrorService,
+    RestaurantService,
+    ShoppingCartService,
+    localeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
