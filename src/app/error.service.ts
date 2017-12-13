@@ -13,16 +13,16 @@ export class ErrorService {
   ) => {
     let errorMessage: string;
 
-    if (err.error instanceof HttpErrorResponse) {
+    if (err.error instanceof Error) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
       errorMessage = `Backend ${err.url} returned code ${
         err.status
       }, body was: ${err.statusText}`;
-    } else {
-      errorMessage = err.toString();
     }
 
     console.log(errorMessage);
 
     return of(false);
-  }
+  };
 }
