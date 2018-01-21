@@ -8,12 +8,12 @@ import { CartItem } from './cart-item.model';
 export class ShoppingCartService {
   private _items: Array<CartItem>;
 
-  get items() {
-    return this._items;
-  }
-
   constructor() {
     this._items = new Array<CartItem>();
+  }
+
+  items(): Array<CartItem> {
+    return this._items;
   }
 
   clear() {
@@ -28,8 +28,9 @@ export class ShoppingCartService {
 
   addItem(item: MenuItem) {
     const foundItem = this._items.find(x => x.menuItem.id === item.id);
+
     if (foundItem) {
-      foundItem.quantity++;
+      this.increaseQuantity(foundItem);
     } else {
       this._items.push(new CartItem(item));
     }
@@ -37,5 +38,17 @@ export class ShoppingCartService {
 
   removeItem(item: CartItem) {
     this._items.splice(this._items.indexOf(item), 1);
+  }
+
+  increaseQuantity(item: CartItem) {
+    item.quantity++;
+  }
+
+  decreaseQuantity(item: CartItem) {
+    item.quantity--;
+
+    if (item.quantity === 0) {
+      this.removeItem(item);
+    }
   }
 }

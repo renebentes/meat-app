@@ -10,27 +10,27 @@ import { ShoppingCartService } from './shopping-cart.service';
   templateUrl: './shopping-cart.component.html'
 })
 export class ShoppingCartComponent implements OnInit {
-  constructor(private shoppingCart: ShoppingCartService) {}
+  constructor(private cartService: ShoppingCartService) {}
 
   ngOnInit() {}
 
   items(): Array<CartItem> {
-    return this.shoppingCart.items;
+    return this.cartService.items();
   }
 
   total(): number {
-    return this.shoppingCart.total();
+    return this.cartService.total();
   }
 
   clear() {
-    this.shoppingCart.clear();
+    this.cartService.clear();
   }
 
   removeItem(item: CartItem) {
-    this.shoppingCart.removeItem(item);
+    this.cartService.removeItem(item);
   }
 
   addItem(item: MenuItem) {
-    this.shoppingCart.addItem(item);
+    this.cartService.addItem(item);
   }
 }

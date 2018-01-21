@@ -7,10 +7,12 @@ import { MenuComponent } from './restaurants/restaurant-detail/menu/menu.compone
 import { RestaurantDetailComponent } from './restaurants/restaurant-detail/restaurant-detail.component';
 import { ReviewsComponent } from './restaurants/restaurant-detail/reviews/reviews.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'order', component: OrderComponent },
   {
     path: 'restaurants/:id',
     component: RestaurantDetailComponent,

@@ -1,0 +1,80 @@
+<section class="content-header">
+</section>
+
+<section class="content">
+  <section class="invoice">
+
+    <form #form="ngForm" novalidate>
+      <pre>
+          {{ form.valid }}
+        {{ form.value | json }}
+      </pre>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
+          </h2>
+        </div>
+      </div>
+
+      <div class="row invoice-info">
+        <div class="col-xs-12">
+          <p class="lead">Endereço de Entrega:</p>
+        </div>
+        <div class="col-sm-5 col-xs-12">
+          <mt-input-container label="Endereço" errorMessage="Campo obrigatório e com 5 caracteres">
+            <input class="form-control" name="address" placeholder="Endereço" ngModel required minlength="5" autocomplete="off">
+          </mt-input-container>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <mt-input-container label="Número" errorMessage="Obrigatório e somente números">
+            <input class="form-control" name="number" placeholder="Número" ngModel required pattern="^[0-9]*$" autocomplete="off">
+          </mt-input-container>
+        </div>
+        <div class="col-sm-4 col-xs-6">
+          <mt-input-container label="Complemento">
+            <input class="form-control" name="optionalAddress" placeholder="Complemento" ngModel autocomplete="off">
+          </mt-input-container>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="lead">Itens do Pedido:</p>
+        </div>
+        <div class="col-xs-12 table-responsive">
+          <mt-order-items [items]="cartItems()" (increaseQuantity)="increaseQuantity($event)" (decreaseQuantity)="decreaseQuantity($event)"
+            (remove)="remove($event)"></mt-order-items>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <p class="lead">Formas de Pagamento:</p>
+
+          <mt-input-container errorMessage="Escolha a opção de pagamento">
+            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel required></mt-radio>
+          </mt-input-container>
+
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <p class="lead">Frete e Total:</p>
+
+          <mt-delivery-costs [delivery]="delivery" [totalItems]="totalItems()"></mt-delivery-costs>
+
+        </div>
+      </div>
+
+    </form>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-success pull-right" (click)="checkout(form.value)" [disabled]="form.invalid || cartItems().length === 0">
+          <i class="fa fa-credit-card"></i> Concluir Pedido
+        </button>
+      </div>
+    </div>
+
+  </section>
+</section>
