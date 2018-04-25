@@ -8,11 +8,13 @@ import { RestaurantDetailComponent } from './restaurants/restaurant-detail/resta
 import { ReviewsComponent } from './restaurants/restaurant-detail/reviews/reviews.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { OrderComponent } from './order/order.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'order', component: OrderComponent },
+  { path: 'order-summary', component: OrderSummaryComponent },
   {
     path: 'restaurants/:id',
     component: RestaurantDetailComponent,
@@ -29,4 +31,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -27,6 +27,7 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { InputComponent } from './shared/input/input.component';
 import { RadioComponent } from './shared/radio/radio.component';
 import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 const localeService = { provide: LOCALE_ID, useValue: 'pt-br' };
 registerLocaleData(localePt);
@@ -48,7 +49,8 @@ registerLocaleData(localePt);
     InputComponent,
     RadioComponent,
     OrderItemsComponent,
-    DeliveryCostsComponent
+    DeliveryCostsComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,

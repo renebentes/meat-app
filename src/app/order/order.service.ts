@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { Order } from './order.model';
 import { api } from 'app/app.api';
-import { ErrorService } from 'app/error.service';
+import { ErrorService } from '@app/error.service';
 
 @Injectable()
 export class OrderService {
@@ -16,7 +16,7 @@ export class OrderService {
     private cartService: ShoppingCartService,
     private http: HttpClient,
     private error: ErrorService
-  ) {}
+  ) { }
 
   cartItems(): Array<CartItem> {
     return this.cartService.items();
@@ -42,12 +42,12 @@ export class OrderService {
     this.cartService.clear();
   }
 
-  checkout(order: Order): Observable<string> {
+  checkout(order: Order): Observable<number> {
     return this.http
       .post<Order>(api.orders, JSON.stringify(order))
-      .pipe(this.catchHttpErrors());
+      .pipe(map((order: Order) => order.id), this.catchHttpErrors());
   }
 
   private catchHttpErrors = () => (source$: Observable<any>) =>
-    source$.pipe(catchError(this.error.handler));
+    source$.pipe(catchError(this.error.handler))
 }

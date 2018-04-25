@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CartItem } from 'app/restaurants/restaurant-detail/shopping-cart/cart-item.model';
 import { RadioOption } from 'app/shared/radio/radio-option.model';
 
-import { OrderService } from './order.service';
-import { Order } from './order.model';
 import { OrderItem } from './order-item.model';
+import { Order } from './order.model';
+import { OrderService } from './order.service';
 
 @Component({
   selector: 'mt-order',
@@ -20,9 +21,9 @@ export class OrderComponent implements OnInit {
 
   delivery = 8;
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   cartItems(): Array<CartItem> {
     return this.orderService.cartItems();
@@ -48,12 +49,13 @@ export class OrderComponent implements OnInit {
     order.items = this.cartItems().map(
       (item: CartItem) =>
         <OrderItem>{
-          menuItemId: item.menuItem.Id,
+          menuItemId: item.menuItem.id,
           quantity: item.quantity
         }
     );
 
-    this.orderService.checkout(order).subscribe((orderId: string) => {
+    this.orderService.checkout(order).subscribe((orderId: number) => {
+      this.router.navigateByUrl('/order-summary');
       this.orderService.clear();
     });
   }
